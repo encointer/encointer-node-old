@@ -56,6 +56,8 @@ pub use runtime_primitives::{Permill, Perbill};
 pub use timestamp::BlockPeriod;
 pub use srml_support::{StorageValue, RuntimeMetadata};
 
+mod demo;
+
 /// Alias to Ed25519 pubkey that identifies an account on the chain.
 pub type AccountId = primitives::H256;
 
@@ -179,6 +181,8 @@ impl upgrade_key::Trait for Runtime {
 	type Event = Event;
 }
 
+impl demo::Trait for Runtime {}
+
 construct_runtime!(
 	pub enum Runtime with Log(InternalLog: DigestItem<Hash, AuthorityId>) where
 		Block = Block,
@@ -191,6 +195,7 @@ construct_runtime!(
 		Aura: aura::{Module},
 		Balances: balances,
 		UpgradeKey: upgrade_key,
+		Demo: demo::{Module, Call, Storage, Config<T>},
 	}
 );
 
