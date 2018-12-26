@@ -38,7 +38,7 @@ fn run() -> cli::error::Result<()> {
 		version: env!("CARGO_PKG_VERSION"),
 		executable_name: "template-node",
 		author: "Anonymous",
-		description: "Template Node",
+		description: "Substrate Node Template",
 	};
 	cli::run(::std::env::args(), cli::Exit, version)
 }

@@ -99,7 +99,7 @@ pub mod opaque {
 /// This runtime version.
 pub const VERSION: RuntimeVersion = RuntimeVersion {
 	spec_name: create_runtime_str!("template-node"),
-	impl_name: create_runtime_str!("template-node"),
+	impl_name: create_runtime_str!("substrate-template-node"),
 	authoring_version: 1,
 	spec_version: 2,
 	impl_version: 0,
