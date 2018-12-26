@@ -7,6 +7,7 @@ use runtime_primitives::traits::Hash;
 use {balances, system::{self, ensure_signed}};
 use rstd::prelude::*;
 
+
 pub trait Trait: balances::Trait {}
 
 decl_module! {
