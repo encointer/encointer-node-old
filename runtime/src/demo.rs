@@ -5,6 +5,7 @@ use parity_codec::Encode;
 use srml_support::{StorageValue, dispatch::Result};
 use runtime_primitives::traits::Hash;
 use {balances, system::{self, ensure_signed}};
+use rstd::prelude::*;
 
 pub trait Trait: balances::Trait {}
 
@@ -39,7 +40,7 @@ decl_module! {
 
 decl_storage! {
 	trait Store for Module<T: Trait> as Demo {
-		Payment get(payment) config(): Option<T::Balance>;
+		Payment get(payment): Option<T::Balance>;
 		Pot get(pot): T::Balance;
 	}
 }

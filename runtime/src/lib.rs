@@ -195,7 +195,7 @@ construct_runtime!(
 		Aura: aura::{Module},
 		Balances: balances,
 		UpgradeKey: upgrade_key,
-		Demo: demo::{Module, Call, Storage, Config<T>},
+		Demo: demo::{Module, Call, Storage},
 	}
 );
 
