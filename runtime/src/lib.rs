@@ -1,3 +1,18 @@
+//  Copyright (c) 2019 Alain Brenzikofer
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+
+
 //! The Substrate Node Template runtime. This can be compiled with `#[no_std]`, ready for Wasm.
 
 #![cfg_attr(not(feature = "std"), no_std)]
@@ -58,6 +73,12 @@ pub use runtime_primitives::{Permill, Perbill};
 pub use timestamp::BlockPeriod;
 pub use srml_support::{StorageValue, RuntimeMetadata};
 
+mod runtime_example;
+mod nctr_token;
+mod ceremonies;
+
+
+
 /// Alias to Ed25519 pubkey that identifies an account on the chain.
 pub type AccountId = primitives::H256;
 
@@ -98,8 +119,8 @@ pub mod opaque {
 
 /// This runtime version.
 pub const VERSION: RuntimeVersion = RuntimeVersion {
-	spec_name: create_runtime_str!("template-node"),
-	impl_name: create_runtime_str!("template-node"),
+	spec_name: create_runtime_str!("encointer-node"),
+	impl_name: create_runtime_str!("encointer-node"),
 	authoring_version: 3,
 	spec_version: 3,
 	impl_version: 0,
@@ -191,6 +212,18 @@ impl sudo::Trait for Runtime {
 	type Proposal = Call;
 }
 
+impl runtime_example::Trait for Runtime {
+	type Event = Event;
+}
+
+impl nctr_token::Trait for Runtime {}
+
+impl ceremonies::Trait for Runtime {
+	type Event = Event;
+}
+
+// TODO: prohibit the usage of balances transfer()
+
 construct_runtime!(
 	pub enum Runtime with Log(InternalLog: DigestItem<Hash, Ed25519AuthorityId>) where
 		Block = Block,
@@ -202,8 +235,12 @@ construct_runtime!(
 		Consensus: consensus::{Module, Call, Storage, Config<T>, Log(AuthoritiesChange), Inherent},
 		Aura: aura::{Module},
 		Indices: indices,
+		//Balances: balances::{Module, Call, Storage, Event, MakePayment, IsDeadAccount, Config<T>},
 		Balances: balances,
 		Sudo: sudo,
+		RuntimeExample: runtime_example::{Module, Call, Storage, Event},
+		NctrToken: nctr_token::{Module, Call, Storage, Config<T>},
+		Ceremonies: ceremonies::{Module, Storage, Call, Event, Config<T>},
 	}
 );
 

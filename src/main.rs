@@ -21,7 +21,7 @@ extern crate substrate_transaction_pool as transaction_pool;
 extern crate substrate_basic_authorship as basic_authorship;
 #[macro_use]
 extern crate substrate_service;
-extern crate template_node_runtime;
+extern crate encointer_node_runtime;
 extern crate node_executor;
 extern crate substrate_inherents as inherents;
 
@@ -33,12 +33,12 @@ pub use substrate_cli::{VersionInfo, IntoExit, error};
 
 fn run() -> cli::error::Result<()> {
 	let version = VersionInfo {
-		name: "Substrate Node",
+		name: "Encointer Node",
 		commit: env!("VERGEN_SHA_SHORT"),
 		version: env!("CARGO_PKG_VERSION"),
-		executable_name: "template-node",
-		author: "Anonymous",
-		description: "Template Node",
+		executable_name: "encointer-node",
+		author: "Alain Brenzikofer",
+		description: "encointer-node",
 	};
 	cli::run(::std::env::args(), cli::Exit, version)
 }

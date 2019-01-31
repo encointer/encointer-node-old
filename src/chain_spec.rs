@@ -1,7 +1,7 @@
 use primitives::{Ed25519AuthorityId, ed25519};
-use template_node_runtime::{
+use encointer_node_runtime::{
 	AccountId, GenesisConfig, ConsensusConfig, TimestampConfig, BalancesConfig,
-	SudoConfig, IndicesConfig
+	SudoConfig, IndicesConfig, CeremoniesConfig, NctrTokenConfig
 };
 use substrate_service;
 
@@ -79,7 +79,7 @@ impl Alternative {
 fn testnet_genesis(initial_authorities: Vec<Ed25519AuthorityId>, endowed_accounts: Vec<AccountId>, root_key: AccountId) -> GenesisConfig {
 	GenesisConfig {
 		consensus: Some(ConsensusConfig {
-			code: include_bytes!("../runtime/wasm/target/wasm32-unknown-unknown/release/template_node_runtime.compact.wasm").to_vec(),
+			code: include_bytes!("../runtime/wasm/target/wasm32-unknown-unknown/release/encointer_node_runtime.compact.wasm").to_vec(),
 			authorities: initial_authorities.clone(),
 		}),
 		system: None,
@@ -100,5 +100,13 @@ fn testnet_genesis(initial_authorities: Vec<Ed25519AuthorityId>, endowed_account
 		sudo: Some(SudoConfig {
 			key: root_key,
 		}),
+		ceremonies: Some(CeremoniesConfig {
+			ceremony_period: 10,
+			last_ceremony: 0,
+			witnessing_period: 5,
+		} ),
+		nctr_token: Some(NctrTokenConfig{
+			transaction_prop_fee: 1000,   // by how much should the tx value be divided to get the proportional fee?
+		} ),
 	}
 }
