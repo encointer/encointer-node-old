@@ -1,3 +1,4 @@
+use rstd::prelude::*;
 use srml_support::{StorageValue, StorageMap, dispatch::Result};
 use system::ensure_signed;
 use runtime_io;

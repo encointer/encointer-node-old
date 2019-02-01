@@ -12,9 +12,9 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-
+use rstd::prelude::*;
 use runtime_primitives::traits::Hash;
-use srml_support::{StorageValue, dispatch::Result};
+use srml_support::{StorageValue, StorageVec, StorageList, dispatch::Result};
 use system::ensure_signed;
 use runtime_io;
 
@@ -34,7 +34,9 @@ decl_module! {
         //let cid = Cid::new(Codec::Raw, Version::V1, &h);
         //runtime_io::print(cid.to_string());
     }
-    fn ipfs_add() {
+    fn ipfs_push(addr: Vec<u8>, data: Vec<u8>) {
+        //let mut cid = Vec<u8>::new();
+        //encode(data, &mut cid);
         //<Value<T>>::put(value);
     }
 
@@ -44,23 +46,27 @@ decl_module! {
 }
 
 impl<T: Trait> Module<T> {
-    fn encode(data: Vec<u8>) -> Result {
+    fn encode(data: Vec<u8>, cid: &mut Vec<u8>) -> Result {
         // hardcoded Blake2s multihash
         let size = 32;
         let code = 0x41;
         let mut output = Vec::new();
         output.resize(2 + size as usize, 0);
-        output[0] = hash.code();
+        output[0] = code;
         output[1] = size;
         // substrate is using Blake2s by default
         let _digest = <<T as system::Trait>::Hashing as Hash>::hash(&data);
+        //*cid = _digest;
         Ok(())
+        
     } 
+
 } 
 
 decl_storage! {
   trait Store for Module<T: Trait> as IpfsStorage {
-    //IpfsAddr: Vec<u8>;
+    IpfsAddr: Vec<u8>;
+    IpfsData: Vec<u8>;
     Value: u32;
   }
 }
