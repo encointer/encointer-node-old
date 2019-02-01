@@ -76,6 +76,7 @@ pub use srml_support::{StorageValue, RuntimeMetadata};
 mod runtime_example;
 mod nctr_token;
 mod ceremonies;
+mod ipfs;
 
 
 
@@ -222,6 +223,10 @@ impl ceremonies::Trait for Runtime {
 	type Event = Event;
 }
 
+impl ipfs::Trait for Runtime {
+	type Event = Event;
+}
+
 // TODO: prohibit the usage of balances transfer()
 
 construct_runtime!(
@@ -241,6 +246,7 @@ construct_runtime!(
 		RuntimeExample: runtime_example::{Module, Call, Storage, Event},
 		NctrToken: nctr_token::{Module, Call, Storage, Config<T>},
 		Ceremonies: ceremonies::{Module, Storage, Call, Event, Config<T>},
+		Ipfs: ipfs::{Module, Call, Storage, Event},
 	}
 );
 
