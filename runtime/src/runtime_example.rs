@@ -1,5 +1,5 @@
 use rstd::prelude::*;
-use srml_support::{StorageValue, StorageMap, dispatch::Result};
+use support::{decl_module, decl_storage, decl_event, StorageValue, StorageMap, dispatch::Result};
 use system::ensure_signed;
 use runtime_io;
 

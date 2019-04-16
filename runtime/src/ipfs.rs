@@ -14,9 +14,10 @@
 
 use rstd::prelude::*;
 use runtime_primitives::traits::Hash;
-use srml_support::{StorageValue, StorageVec, StorageList, dispatch::Result};
+use support::{decl_module, decl_storage, decl_event, StorageValue, StorageVec, StorageList, dispatch::Result};
 use system::ensure_signed;
 use runtime_io;
+
 
 //use multihash::{encode, decode, Hash, Multihash, to_hex};
 //use cid::{Cid, Codec, Version, Prefix};

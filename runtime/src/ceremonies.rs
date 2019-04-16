@@ -18,7 +18,7 @@ use rstd::prelude::*;
 use parity_codec::Encode;
 
 // Enables access to the runtime storage
-use srml_support::{StorageValue, StorageMap, Parameter, dispatch::Result};
+use support::{decl_module, decl_storage, decl_event, StorageValue, StorageMap, Parameter, dispatch::Result};
 
 // Enables us to do hashing
 use runtime_primitives::traits::{Zero, Hash, As, Member, SimpleArithmetic};
@@ -29,7 +29,7 @@ use {balances, system::{self, ensure_signed}};
 use parity_codec::Codec;
 
 use timestamp::OnTimestampSet;
-use Balances;
+
 use runtime_io;
 
 // list all traits that define types we will need
@@ -99,7 +99,7 @@ impl<T: Trait> Module<T> {
 //  }
   fn reward_registrant(who: &T::AccountId) -> Result {
     let value = T::Balance::sa(100);
-    <balances::Module<T>>::reward(who, value);
+    //TODO <balances::Module<T>>::reward(who, value);
     Ok(())
   }
 }

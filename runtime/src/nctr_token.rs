@@ -17,11 +17,9 @@
 // post({sender: runtime.indices.ss58Decode('F7Gh'), call: calls.demo.setPayment(1000)}).tie(console.log)
 
 use parity_codec::Encode;
-use srml_support::{StorageValue, Parameter, dispatch::Result};
-use runtime_primitives::traits::{Hash, Zero, SimpleArithmetic, MakePayment,
-	As, StaticLookup, Member, CheckedAdd, CheckedSub}; 
+use support::{decl_module, decl_storage, decl_event, StorageValue, Parameter, dispatch::Result};
+use runtime_primitives::traits::{Hash, Zero, SimpleArithmetic, As, StaticLookup, Member, CheckedAdd, CheckedSub}; 
 use balances;
-use balances::EnsureAccountLiquid; 
 use system::{self, IsDeadAccount, OnNewAccount, ensure_signed};
 use rstd::prelude::*;
 use runtime_io;
