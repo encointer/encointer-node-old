@@ -52,7 +52,8 @@ decl_module! {
 		fn witness(_origin) -> Result {
 			Ok(())
 		}
- 		fn on_finalise(n: T::BlockNumber) {
+ 		fn on_finalize(n: T::BlockNumber) {
+      runtime_io::print("ceremonies: on_finalize was called");
       let p = Self::ceremony_period();
       if (n % p).is_zero() {
         runtime_io::print("blocknumber is divisible by CeremonyPeriod");
