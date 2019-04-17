@@ -116,9 +116,9 @@ fn testnet_genesis(initial_authorities: Vec<AuthorityId>, endowed_accounts: Vec<
 			key: root_key,
 		}),
 		ceremonies: Some(CeremoniesConfig {
-			ceremony_period: 10,
+			ceremony_period: 4,
 			last_ceremony: 0,
-			witnessing_period: 5,
+			witnessing_period: 2,
 		} ),
 //		nctr_token: Some(NctrTokenConfig{
 //			transaction_prop_fee: 1000,   // by how much should the tx value be divided to get the proportional fee?

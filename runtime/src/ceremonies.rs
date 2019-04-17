@@ -40,6 +40,7 @@ pub trait Trait: balances::Trait + timestamp::Trait {
 
 decl_module! {
 	pub struct Module<T: Trait> for enum Call where origin: T::Origin {
+    fn deposit_event() = default;
     // entry points
 		fn register(origin) -> Result {
 			let sender = ensure_signed(origin)?;
@@ -57,6 +58,7 @@ decl_module! {
       let p = Self::ceremony_period();
       if (n % p).is_zero() {
         runtime_io::print("blocknumber is divisible by CeremonyPeriod");
+        Self::deposit_event(Event::TimeToRegister());
         //<CeremonyRegistry<T>>::for_each_tuple(
         //  runtime_io::print
         //  ) 
@@ -80,6 +82,7 @@ decl_storage! {
 decl_event!(
     pub enum Event {
         Registered(u32),
+        TimeToRegister(),
     }
 );
 
